@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PostController!{% endblock %}
+
+{% block body %}
+ 
+        {% for post in posts %}
+        <article>
+        <h3>{{post.title}}</h3>
+        <p>{{post.content}}</p>
+         <legend>{{post.CreatedAt.format('d-m-Y H:i:s')}}</legend>
+   </article>
+        {% endfor %}
+<br>
+        <a href="{{path('app_post_create')}}">Créer un nouvel album</a>
+
+{% endblock %}

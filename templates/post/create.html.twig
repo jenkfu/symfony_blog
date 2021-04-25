@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<h3>{{ new }}</h3>
+
+{{form( albumForm )}}
+{# <form  method="POST">
+    <div>
+        <label for="title"> Title</label>  <br>
+        <input type="text" id="title" name="title" required>
+    </div>
+  
+    <div>
+        <label for="content"> Content</label>  <br>
+        <textarea type="text" id="content" rows="5" cols="60" name="content" required> </textarea>
+    </div>
+
+ <div>
+        <label for="date"> Date</label>  <br>
+       <input type="datetime" id="date" name="date" required>
+    </div>
+
+    <input type="submit" value="Create New Post">
+</form> #}
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello Titre!{% endblock %}
+
+{% block body %}
+
+<div>
+
+    <ul>
+        {% for categorie in categories %}
+        <li>{{categorie.name}}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
