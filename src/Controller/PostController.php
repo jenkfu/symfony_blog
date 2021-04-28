@@ -4,6 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Post;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class PostController extends AbstractController
 {
     /**
-     * @Route("/post", name="post")
+     * @Route("/", name="album")
      */
     public function index(): Response
     {
@@ -30,12 +34,25 @@ class PostController extends AbstractController
     public function create(Request $request): Response
     {
       $form =  $this->createFormBuilder()
-        ->add('title')
-        ->add('content')
-        ->add('date')
+        ->add('title', TextType::class)
+        ->add('content', TextareaType::class)
+        ->add('date', DateTimeType::class)
+        ->add('submit', SubmitType::class, ['label' => 'Créer l\'album'])
         ->getForm()
         ;
 
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()) {
+             $post = new Post();
+        $data = $form->getData();
+         $post->setTitle($data['title']);
+         $post->setContent($data['content']);
+         $post->setCreatedAt($data['date']);
+         $entityManager = $this->getDoctrine()->getManager();
+         $entityManager->persist($post);
+        $entityManager->flush();
+           return $this->redirectToRoute('album');
+        }
         // if($request->isMethod('POST')) {
         //    $data = $request->request->all();
         //  $post = new Post();
