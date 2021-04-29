@@ -29,7 +29,12 @@ class PostController extends AbstractController {
      */
     public function create(Request $request): Response {
         $post = new Post;
-        $form = $this->createFormBuilder($post) ->add('title', TextType::class, ['attr'=> ['autofocus'=> true]]) ->add('content', TextareaType::class, ['attr'=> ['rows'=> 10, 'cols'=> 50]]) ->add('createdAt', DateTimeType::class) ->add('submit', SubmitType::class, ['label'=> 'Créer l\'album']) ->getForm();
+        $form = $this->createFormBuilder($post) 
+        ->add('title', null, ['attr'=> ['autofocus'=> true]]) 
+        ->add('content', null, ['attr'=> ['rows'=> 10, 'cols'=> 50]]) 
+        ->add('createdAt', DateTimeType::class) 
+    
+        ->getForm();
 
         $form->handleRequest($request);
 

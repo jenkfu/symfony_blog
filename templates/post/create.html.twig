@@ -3,7 +3,11 @@
 {% block body %}
 <h3>{{ new }}</h3>
 
-{{form( albumForm )}}
+{{form_start( albumForm )}}
+{{form_widget( albumForm )}}
+   <input type="submit" value="Create New Post">
+   {{form_end( albumForm )}}
+
 {# <form  method="POST">
     <div>
         <label for="title"> Title</label>  <br>
